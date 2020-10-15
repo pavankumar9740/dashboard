@@ -8,7 +8,7 @@
         </transition>
         <div class="app-main__outer">
             <div class="app-main__inner">
-                Work in Progress. Please click on any of the other available links.			
+                Coming soon. Please click on any of the other available links.			
             </div>
         </div>
     </div>
