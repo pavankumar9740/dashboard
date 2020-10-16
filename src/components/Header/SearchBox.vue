@@ -1,22 +1,35 @@
 <template>
     <div>
         <div>
-            <span v-if="this.$root.user != ''">Welcome <b>{{this.$root.user.profile.GivenName}} </b>({{this.$root.user.profile.Role}}) </span><a v-if="isUserLoggedIn" href="#" v-on:click="logout">Logout</a>
+            <span v-if="isUserLoggedIn">Welcome <b>{{userName}} </b>({{role}}) </span><a v-if="isUserLoggedIn" href="#" v-on:click="logout">Logout</a>
         </div>
     </div>
 </template>
 
 <script>
+    import jwt_decode from "jwt-decode";
     export default {
         data() {
             return {
                 searchOpen: false,
+                userName:'',
+                role:'',
+                token:null
             }
         },
         computed:{
             isUserLoggedIn: function(){
-                return process.env.NODE_ENV ==="development"? this.$root.user: this.$root.access_token!=null  
+                return this.token!=null;
             }
+        },
+        created(){
+            this.token= process.env.NODE_ENV === "development"
+                    ? this.$root.user.access_token
+                    : this.$root.access_token;
+            var decodedToken = jwt_decode(this.token);
+            console.log(decodedToken);
+            this.userName = decodedToken.GivenName;
+            this.role= decodedToken.Role;
         },
         methods:{
             logout: function(){
