@@ -1,14 +1,7 @@
 <template>
     <div>
-        <div class="search-wrapper" v-bind:class="{ active: searchOpen }">
-            <div class="input-holder">
-                <input type="text" class="search-input" placeholder="Type to search"/>
-                <button class="search-icon" v-on:click="searchOpen = !searchOpen"><span/></button>
-            </div>
-            <button class="close" v-on:click="searchOpen = !searchOpen"/>
-        </div>
         <div>
-            <a v-if="isUserLoggedIn" href="#" v-on:click="logout">Logout</a>
+            <span v-if="this.$root.user != ''">Welcome <b>{{this.$root.user.profile.GivenName}} </b>({{this.$root.user.profile.Role}}) </span><a v-if="isUserLoggedIn" href="#" v-on:click="logout">Logout</a>
         </div>
     </div>
 </template>
@@ -22,10 +15,8 @@
         },
         computed:{
             isUserLoggedIn: function(){
-                if(process.env.NODE_ENV==="development")
-                    return this.$root.user !=='' && this.$root.user !==null;
-                return this.$root.access_token!=='' &&  this.$root.access_token!==null  
-                }
+                return process.env.NODE_ENV ==="development"? this.$root.user: this.$root.access_token!=null  
+            }
         },
         methods:{
             logout: function(){
