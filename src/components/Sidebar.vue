@@ -38,17 +38,18 @@
                                             <i class="arrow down"></i>
                                         </a>
                                     </template>
-                            <li v-if="isRouteAllowed('MfListing')">
-                                <router-link to="/MfListing">Manufacturers</router-link>
-                            </li>
-                            <li v-if="isRouteAllowed('SupplierManagement')">
+                                    <li v-if="isRouteAllowed('MfListing')">
+                                        <router-link to="/MfListing">Manufacturers</router-link>
+                                    </li>
+                                    <li v-if="isRouteAllowed('SupplierManagement')">
                                         <router-link to="/SupplierManagement">Suppliers</router-link>
                                     </li>
                                     <li v-if="isRouteAllowed('MonthlyReturn')">
                                         <router-link to="/MonthlyReturn"><span class="sub-text">Monthly Returns</span></router-link>
                                     </li>
-                            </b-dropdown>
+                                </b-dropdown>
                             </li>
+                            <!-- tpsaf -->
                             <li v-if="isRouteAllowed('Tpsaf')">
                                 <router-link to="/tpsaf">
                                     <span class="active-icon">
@@ -79,41 +80,44 @@
                                             <i class="arrow down"></i>
                                         </a>
                                     </template>
-                            <li v-if="isRouteAllowed('PlaceOrder')">
-                                <router-link to="/PlaceOrder">Place Order</router-link>
-                            </li>
-                            <li v-if="isRouteAllowed('Orders')">
-                                <router-link to="/Orders">Orders List</router-link>
-                            </li>
-                            <li v-if="isRouteAllowed('ReturnOrder')">
-                                <router-link to="/ReturnOrder">Order Returns </router-link>
-                            </li>
-                            <li v-if="isRouteAllowed('MfOrders')">
-                                <!-- <router-link to="/Orders">Manufacturer Orders</router-link> -->
-                                <router-link to="/MfOrders">Manufacturer Orders</router-link>
-                            </li>
-                            <li v-if="isRouteAllowed('StockOrders')">
-                                <!-- <router-link to="/Orders">Stock Orders</router-link> -->
-                                <router-link to="/StockOrders">Stock Orders</router-link>
-                            </li>
-                            <li v-if="isRouteAllowed('InternalStockRequest')">
-                                <!-- <router-link to="/Orders">Stock Orders</router-link> -->
-                                <router-link to="/InternalStockRequest">Internal Stock Transfer Request</router-link>
-                            </li>
-                            <li v-if="isRouteAllowed('StockRequestList')">
-                                <!-- <router-link to="/Orders">Stock Orders</router-link> -->
-                                <router-link to="/StockRequestList">Stock Requests</router-link>
-                            </li>
-                            <li v-if="isRouteAllowed('ApproveRejectProduct')">
-                                <router-link to="/ChangeSkuProductApprove">ChangeSku / Product Approval</router-link>
-                            </li>
-                            <li v-if="isRouteAllowed('ChangeSKUProductName')">
-                                <router-link to="/ChangeSKUProductName">Change SKU/Supplier</router-link>
-                            </li>
-                            <li v-if="isRouteAllowed('ChangeSKUProductNamelisting') || isRouteAllowed('ChangeSKUProductName')">
-                                <router-link to="/ChangeSKUProductNamelisting">Change SKU/Supplier Listing</router-link>
-                            </li>
-                            </b-dropdown>
+                                    <li v-if="isRouteAllowed('PlaceOrder')">
+                                        <router-link v-if="isOrgActive"  to="/PlaceOrder">Place Order</router-link>
+                                        <span v-else :class="linkDisabledClass">Place Order</span>
+                                    </li>
+                                    <li v-if="isRouteAllowed('Orders')">
+                                        <router-link v-if="isOrgActive" to="/Orders">Orders List</router-link>
+                                        <span v-else :class="linkDisabledClass">Orders List</span>                                        
+                                    </li>
+                                    <li v-if="isRouteAllowed('ReturnOrder')">
+                                        <router-link v-if="isOrgActive" to="/ReturnOrder">Order Returns</router-link>
+                                        <span v-else :class="linkDisabledClass">Order Returns</span>
+                                    </li>
+                                    <li v-if="isRouteAllowed('MfOrders')">
+                                        <router-link to="/MfOrders">Manufacturer Orders</router-link>                                        
+                                    </li>
+                                    <li v-if="isRouteAllowed('StockOrders')">
+                                        <router-link to="/StockOrders">Stock Orders</router-link>
+                                    </li>
+                                    <li v-if="isRouteAllowed('InternalStockRequest')">
+                                        <router-link v-if="isOrgActive" to="/InternalStockRequest">Internal Stock Transfer Request</router-link>
+                                        <span v-else :class="linkDisabledClass">Internal Stock Transfer Request</span>
+                                    </li>
+                                    <li v-if="isRouteAllowed('StockRequestList')">
+                                        <router-link v-if="isOrgActive" to="/StockRequestList">Stock Requests</router-link>
+                                        <span v-else :class="linkDisabledClass">Stock Requests</span>
+                                    </li>
+                                    <li v-if="isRouteAllowed('ApproveRejectProduct')">
+                                        <router-link to="/ChangeSkuProductApprove"><span class="sub-text">ChangeSku / Product Approval</span></router-link>
+                                    </li>
+                                    <li v-if="isRouteAllowed('ChangeSKUProductName')">
+                                         <router-link v-if="isOrgActive" to="/ChangeSKUProductName">Change SKU / Product</router-link>
+                                         <span v-else :class="linkDisabledClass">Change SKU / Product</span>
+                                    </li>
+                                    <li v-if="isRouteAllowed('ChangeSKUProductNamelisting') || isRouteAllowed('ChangeSKUProductName')">
+                                         <router-link v-if="isOrgActive" to="/ChangeSKUProductNamelisting">Change SKU / Product Listing</router-link>
+                                         <span v-else :class="linkDisabledClass">Change SKU / Product Listing</span>
+                                    </li>
+                                </b-dropdown>
                             </li>
                             <li class="sub-menu" v-if="isRouteAllowed('PrintOrderPlacement') || isRouteAllowed('PrintOrders')">
                                 <b-dropdown ref="dropdown">
@@ -131,7 +135,8 @@
                                 <router-link to="/PrintOrderPlacement">Place Print Order</router-link>
                             </li>
                             <li v-if="isRouteAllowed('PrintOrders')">
-                                <router-link to="/PrintOrders">Print Orders</router-link>
+                                <router-link v-if="isOrgActive" to="/PrintOrders">Print Orders</router-link>
+                                <span v-else :class="linkDisabledClass">Print Orders</span>
                             </li>
                             </b-dropdown>
                             </li>
@@ -145,7 +150,7 @@
                                 </a>
                             </li>
                             <li v-if="isRouteAllowed('ViewMf')" class="sub-menu">
-                                <router-link :to="'/ViewMf/' + this.orgId">
+                                <router-link :to="{ name: 'ViewMf', params: {mfId: this.orgId} }">
                                     <span class="active-icon">
                                         <img src="@/assets/images/sidebar/registration-details.png" alt />
                                         <img src="@/assets/images/sidebar/registration-details-selected.png" alt />
@@ -211,14 +216,20 @@
                                     <span class="sub-text">Reports</span>
                                 </a>
                             </li>
-                            <li class="sub-menu" v-if="isRouteAllowed('UserManagement')">
-                                <router-link to="/UserManagement">
+                            <li class="sub-menu" v-if="isRouteAllowed('UserManagement')">                                                                
+                                <router-link v-if="isOrgActive" to="/UserManagement">
                                     <span class="active-icon">
                                         <img src="@/assets/images/sidebar/user-management.png" alt />
                                         <img src="@/assets/images/sidebar/user-management-selected.png" alt />
                                     </span>
                                     <span class="sub-text">User Management</span>
                                 </router-link>
+                                <span v-else :class="linkDisabledClass">
+                                    <span class="active-icon">
+                                        <img src="@/assets/images/sidebar/user-management.png" alt />
+                                        <img src="@/assets/images/sidebar/user-management-selected.png" alt />
+                                    </span>
+                                    User Management</span>
                             </li>
                         </ul>
                     </div>
@@ -232,6 +243,7 @@
     import VuePerfectScrollbar from 'vue-perfect-scrollbar';
     import jwt_decode from 'jwt-decode';
     import { getAllowedRoutes } from '../router/routeFunctions';
+    import axios from 'axios';
 
     export default {
         components: {
@@ -240,20 +252,35 @@
         data() {
             return {
                 isOpen: false,
-                orgId:0,
+                orgId : 0,
                 sidebarActive: false,
                 windowWidth: 0,
-                allowedRoutes: []
+                allowedRoutes: [],
+                isOrgActive:false,
+                token:null,
+                linkDisabledClass:""
             }
         },
         computed: {
 
         },
         created: function () {
-            var token = process.env.NODE_ENV === "development" ? this.$root.user.access_token : this.$root.access_token;
-            this.orgId =  this.role = jwt_decode(token).OrgId;
-            this.role = jwt_decode(token).Role;
+            this.token = process.env.NODE_ENV === "development" ? this.$root.user.access_token : this.$root.access_token;
+            var decodedToken = jwt_decode(this.token);
+            this.orgId = decodedToken.OrgId;
+            this.role = decodedToken.Role;
             this.allowedRoutes = getAllowedRoutes(this.role);
+            this.setOrgActive();
+            
+        },
+        mounted() {
+            document.body.classList.remove('open-sidebar');
+            this.$nextTick(function () {
+                window.addEventListener('resize', this.getWindowWidth);
+
+                //Init
+                this.getWindowWidth()
+            })
         },
         props: {
             sidebarbg: String,
@@ -289,17 +316,21 @@
             },
             isRouteAllowed(routeName) {
                 return this.allowedRoutes.indexOf(routeName) != -1;
-            }
+            },
+            setOrgActive() {
+                axios.get("/Org/IsOrgActive", {
+                    baseURL: process.env.VUE_APP_VmApisBaseUrl,
+                    headers: {
+                        "Content-Type": "application/json",
+                        Authorization: "Bearer " + this.token,
+                    },
+                }).then((response) => {
+                    this.isOrgActive = response.data;
+                }).catch((error) => {
+                    console.error(error)
+                });
+            },
 
-        },
-        mounted() {
-            this.$nextTick(function () {
-                window.addEventListener('resize', this.getWindowWidth);
-
-                //Init
-                this.getWindowWidth()
-            });
-			document.body.classList.remove('open-sidebar');
         },
 
         beforeDestroy() {

@@ -5,7 +5,7 @@ var mgr = new Oidc.UserManager({
     client_id: process.env.VUE_APP_AppId,
     redirect_uri: process.env.VUE_APP_RedirectUri,
     response_type: 'id_token token',
-    scope: 'openid profile ProductManagementApi',
+    scope: 'openid profile ProductManagementApi VendorManagementApi',
     post_logout_redirect_uri: process.env.VUE_APP_PostLogoutUri,
 
     userStore: new Oidc.WebStorageStateStore({ store: window.localStorage }),

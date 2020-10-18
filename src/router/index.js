@@ -21,7 +21,7 @@ allRoutes.forEach(entry => {
                     next();
                 }
                 else if(entry.url!=""){
-                    location.href = entry.component!=""? entry.url + entry.path: entry.url;
+                    location.href = entry.component!=""? entry.url + to.path: entry.url;
                 }
             },
             component: () => import('../views/' + entry.component + '.vue'),
