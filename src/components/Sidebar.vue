@@ -13,7 +13,7 @@
             </div>
         </div>
         <div class="app-sidebar-content sidebar-menu" @mouseover="toggleSidebarHover('add', 'open-sidebar')" @mouseleave="toggleSidebarHover('remove', 'open-sidebar')">
-            <VuePerfectScrollbar class="app-sidebar-scroll" v-once>
+            <VuePerfectScrollbar class="app-sidebar-scroll">
                 <aside>
                     <div class="nano">
                         <ul class="nano-content">
