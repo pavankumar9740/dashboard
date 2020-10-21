@@ -167,6 +167,15 @@
                                     <span class="sub-text">Daily Consumption</span>
                                 </a>
                             </li>
+                            <li v-if="isRouteAllowed('PrintPartner')" class="sub-menu">
+                                <router-link to="/PrintPartner">
+                                    <span class="active-icon">
+                                        <img src="@/assets/images/sidebar/Print-partners.png" alt />
+                                        <img src="@/assets/images/sidebar/Print-partners-selected.png" alt />
+                                    </span>
+                                    <span class="sub-text">Print Partners</span>
+                                </router-link>
+                            </li>
                             <li v-if="isRouteAllowed('ProdMgmtHome') || isRouteAllowed('ReelSizeManagement') || isRouteAllowed('ProductManagement') ||isRouteAllowed('MeasurementUnits')" class="sub-menu">
                                 <b-dropdown ref="dropdown">
                                     <template v-slot:button-content>
