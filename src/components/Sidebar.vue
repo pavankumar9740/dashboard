@@ -68,7 +68,7 @@
                                     <span class="sub-text">Delivery Partner</span>
                                 </router-link>
                             </li>
-                            <li class="sub-menu" v-if="isRouteAllowed('Order') || isRouteAllowed('MfOrders') || isRouteAllowed('ReturnOrder') || isRouteAllowed('StockOrders') ||  isRouteAllowed('InternalStockRequest') || isRouteAllowed('StockRequestList') || isRouteAllowed('ApproveRejectProduct') || isRouteAllowed('ChangeSKUProductName') || isRouteAllowed('ChangeSKUProductNamelisting')">
+                            <li class="sub-menu" v-if="isRouteAllowed('Order') || isRouteAllowed('MfOrders') || isRouteAllowed('ReturnOrder') || isRouteAllowed('StockOrders') ||  isRouteAllowed('InternalStockRequest') || isRouteAllowed('StockRequestList') || isRouteAllowed('ApproveRejectProduct') || isRouteAllowed('ChangeSKUProductName') || isRouteAllowed('ChangeSKUProductNamelisting') || isRouteAllowed('TracePackage')">
                                 <b-dropdown ref="dropdown">
                                     <template v-slot:button-content>
                                         <a>
@@ -117,6 +117,9 @@
                                          <router-link v-if="isOrgActive" to="/ChangeSKUProductNamelisting">Change SKU / Product Listing</router-link>
                                          <span v-else :class="linkDisabledClass">Change SKU / Product Listing</span>
                                     </li>
+                                     <li v-if="isRouteAllowed('TracePackage')">
+                                        <router-link to="/TracePackage">Trace Package</router-link>
+                                    </li>
                                 </b-dropdown>
                             </li>
                             <li class="sub-menu" v-if="isRouteAllowed('PrintOrderPlacement') || isRouteAllowed('PrintOrders')">
@@ -135,8 +138,7 @@
                                 <router-link to="/PrintOrderPlacement">Place Print Order</router-link>
                             </li>
                             <li v-if="isRouteAllowed('PrintOrders')">
-                                <router-link v-if="isOrgActive" to="/PrintOrders">Print Orders</router-link>
-                                <span v-else :class="linkDisabledClass">Print Orders</span>
+                                <router-link to="/PrintOrders">Print Orders</router-link>
                             </li>
                             </b-dropdown>
                             </li>

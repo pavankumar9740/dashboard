@@ -32,6 +32,7 @@ const orderMgmtRouteArray=[
     {"name":"ChangeSKUProductNamelisting","path":"/ChangeSKUProductNamelisting","component":"Changeskulisting","url":process.env.VUE_APP_OrderMgmtAppUrl,"allowedRoles":[roles.TsspAdmin, roles.TsspIntermediate, roles.TsspWarehouseIncharge,roles.MfAdmin,roles.MfAccountManager]},
     {"name":"changeSkuProductNameReview","path":"/changeSkuProductNameReview","component":"changeSkuProductNameReview","url":process.env.VUE_APP_OrderMgmtAppUrl,"allowedRoles":[roles.TsspAdmin, roles.TsspIntermediate, roles.TsspWarehouseIncharge]},
     {"name":"changeSkuProductNameView","path":"/changeSkuProductNameView","component":"changeSkuProductNameView","url":process.env.VUE_APP_OrderMgmtAppUrl,"allowedRoles":[roles.TsspAdmin, roles.TsspIntermediate, roles.TsspWarehouseIncharge,roles.MfAdmin,roles.MfAccountManager]},
+    {"name":"TracePackage","path":"/TracePackage","component":"TracePackage","url":process.env.VUE_APP_OrderMgmtAppUrl,"allowedRoles":[roles.TsspAdmin, roles.TsspIntermediate]},
 ]
 
 export default orderMgmtRouteArray;
