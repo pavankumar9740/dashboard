@@ -2,7 +2,7 @@
     <div class="app-header header-shadow">
         <div class="app-header__content">
 			<div class="app-header-left">
-                <div class="header-logo"><a href="#"></a></div>
+                <div class="header-logo"><router-link to= "/ViewDashboard"></router-link></div>
             </div>
             <div class="app-header-right">
                 <SearchBox/>
