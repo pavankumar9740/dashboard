@@ -8,13 +8,19 @@
 
 <script>
     import jwt_decode from "jwt-decode";
+    import roles from "../../router/roles";
     export default {
         data() {
             return {
                 searchOpen: false,
                 userName:'',
                 role:'',
-                token:null
+                token:null,
+                roleDisplayName : [{role: roles.TsspAdmin, displayName:"Admin"},{role: roles.TsspIntermediate, displayName:"Intermediate Role"},{role: roles.TsspWarehouseIncharge, displayName:"Warehouse Incharge"}, 
+                {role:roles.TpsafAdmin, displayName:"Admin"},{role:roles.TpsafFacilityAdmin, displayName:"Facility Admin"},{role:roles.TpsafFacilityIncharge, displayName:"Facility Incharge"},
+                {role:roles.TaxAuthAdmin, displayName:"Admin"},{role:roles.TaxAuthRevenueOfficer, displayName:"Revenue Officer"},
+                {role:roles.MfAdmin, displayName:"Admin"},{role:roles.MfAccountManager, displayName:"Account Manager"},{role:roles.MfWarehouseIncharge, displayName:"Warehouse Incharge"},
+                {role:roles.PrintPartner, displayName:"Print Partner"}]
             }
         },
         computed:{
@@ -29,7 +35,7 @@
             var decodedToken = jwt_decode(this.token);
             console.log(decodedToken);
             this.userName = decodedToken.GivenName;
-            this.role= decodedToken.Role;
+            this.role = this.getRoleDisplayName(decodedToken.Role);
         },
         methods:{
             logout: function(){
@@ -41,6 +47,9 @@
                 window.location.href= process.env.VUE_APP_Authority + '/Account/Logout'
                 }
                 
+            },
+            getRoleDisplayName: function(role){
+                return this.roleDisplayName.find(x=>x.role == role).displayName;
             }
             
         }
