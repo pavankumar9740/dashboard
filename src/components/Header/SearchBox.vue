@@ -1,7 +1,7 @@
 <template>
     <div>
         <div>
-            <span v-if="isUserLoggedIn">Welcome <b>{{userName}} </b>({{role}}) </span><a v-if="isUserLoggedIn" href="#" v-on:click="logout">Logout</a>
+            <span v-if="isUserLoggedIn">Welcome <b>{{userName}} </b>({{getRoleDisplayName}}) </span><a v-if="isUserLoggedIn" href="#" v-on:click="logout">Logout</a>
         </div>
     </div>
 </template>
@@ -14,7 +14,7 @@
             return {
                 searchOpen: false,
                 userName:'',
-                role:'',
+                userRole:'',
                 token:null,
                 roleDisplayName : [{role: roles.TsspAdmin, displayName:"Admin"},{role: roles.TsspIntermediate, displayName:"Intermediate Role"},{role: roles.TsspWarehouseIncharge, displayName:"Warehouse Incharge"}, 
                 {role:roles.TpsafAdmin, displayName:"Admin"},{role:roles.TpsafFacilityAdmin, displayName:"Facility Admin"},{role:roles.TpsafFacilityIncharge, displayName:"Facility Incharge"},
@@ -26,6 +26,9 @@
         computed:{
             isUserLoggedIn: function(){
                 return this.token!=null;
+            },
+            getRoleDisplayName: function(){
+                return this.roleDisplayName.find(x=>x.role == this.userRole).displayName;
             }
         },
         created(){
@@ -35,7 +38,7 @@
             var decodedToken = jwt_decode(this.token);
             console.log(decodedToken);
             this.userName = decodedToken.GivenName;
-            this.role = this.getRoleDisplayName(decodedToken.Role);
+            this.userRole = decodedToken.Role;
         },
         methods:{
             logout: function(){
@@ -48,9 +51,6 @@
                 }
                 
             },
-            getRoleDisplayName: function(role){
-                return this.roleDisplayName.find(x=>x.role == role).displayName;
-            }
             
         }
     }
